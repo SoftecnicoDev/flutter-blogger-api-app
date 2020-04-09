@@ -82,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       var document = parse(postDesc);
                       //Regular expression
                       RegExp regExp = new RegExp(
-                        r"(https?:\/\/.*\.(?:png|jpg|gif))",
+                        // So that you can read the format of the webp image to make some changes, adding webp
+                        r"(https?:\/\/.*\.(?:png|jpg|gif|webp))",
                         caseSensitive: false,
                         multiLine: false,
                       );
@@ -93,12 +94,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       //print("firstMatch : " + match);
                       //Converting the regex output to image (Slashing) , since the output from regex was not perfect for me
                       if (match.length > 5) {
-                        if (match.contains(".jpg")) {
-                          imgUrl = match.substring(0, match.indexOf(".jpg"));
+                        //and here add the following line with the webp format
+                        if (match.contains(".webp")) {
+                          imgUrl = match.substring(0, match.indexOf(".webp"));
                           print(imgUrl);
                         } else {
-                          imgUrl =
-                              "https://pbs.twimg.com/profile_images/916384996092448768/PF1TSFOE_400x400.jpg";
+                          // and here add the following line with the jpg format
+                          imgUrl = match.substring(0, match.indexOf(".jpg"));
+                            //  "https://pbs.twimg.com/profile_images/916384996092448768/PF1TSFOE_400x400.jpg";
                         }
                       }
                       String description = document.body.text.trim();
